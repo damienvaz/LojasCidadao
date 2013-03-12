@@ -1,0 +1,163 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs30 \cf0 Grupo I\
+\
+-Ver o que \'e9 100 base t/F/tx etc\
+-base \'e9 que frequencia de codificacao come\'e7a em 0 hz\
+-detalhes fisicos excessivos sobre os cabos nao sai\
+-Escolha multipla vale 1/3 do teste\
+-Escolha multipla desconta 100%\
+-Desenvolvimento tamb\'e9m descontam, se a resposta nao tem nada a ver\
+-Desenvolvimento:\
+	- subnetting\
+	- encaminhamento (muito basico, tabelas de enderecamento)\
+	- nao \'e9 preciso saber cenas obscuras do arp (s\'f3 basico, msm vale para outros protocolos)\
+	- o prof vai "buscar escolhas multiplas a outros testes", porque n\'e3o h\'e1 muito por onde inventar\
+	- \
+\
+01 v, estendido, mandar mais pacotes sem confirmacao \
+02 f, nao ha limite na norma, j\'e1 h\'e1 1gbps em cobre\
+03 f, tem de tar nessa rede local\
+04 f, pergunta mal feita, router nao ve datagramas isso \'e9 nivel transporte, router ve nivel rede, ve pacotes. quem solicita \'e9 o tcp por ex. SE dissesse pacote, era falso, pois no nivel de rede, nunca se pede retransmissao, descarta-se.  \
+05 f, pois nao \'e9 FIFO, \'e9 aleat\'f3rio.\
+06 f, nenum \'e9 orientado a conecao\
+07 v, pois \'e9 o endereco de broascast dessa rede\
+\
+	192.192.192.191\
+	class c /24\
+\
+	como mascara \'e9 /26, \'e9 um subrede\
+\
+	ultimo octeto \
+	191 = 0111 1111\
+	parte do host ta td a uns (11 1111) logo \'e9 impossivel distinguir entre esse host e broadcoast\
+08 f, switches nao mexem em IPs\
+09 f, \'e9 as tramas que se podem enviar em receber confirmacao\
+10 f, a<1, velocidades de propagacao grandes e distancia curtas\
+11 v, \
+12 f, pois se usa arp para descobrir o endereco IP, e nao vai dentro de um pacote ip (ligo te para o telemovel para te perguntar o teu numero de telemovel? nao)\
+13 v\
+14 f, ver slide\
+15 v\
+	ttl n\'e3o \'e9 mesmo tempo, \'e9 nr hops\
+16 v, slide, ex: teclado\
+17 f, entao para que existem os outros?\
+18 v, tirado do livro\
+19 v, slide no min 2x o tamanho da trama para se conseguir detectar colisao ao enviar a trama\
+20 v\
+21 v, se bem que nao se usa na practica\
+22 ?, slide, todos os char sao independentes, t\'eam bits de controlo\
+23 v\
+24 f, sao redes reservadas para serem privadas\
+25 f, ipv6 ve encaminhamento olhando para a origem, embora no ipv4 n\
+26 slide, segudno prof controlo de fluxo inclui controlo de erros\
+27 f, tamanho varia mas nao ha fragmentacao na rede\
+28 v, \
+29 v, senao mais nenhuma era usada\
+30 v\
+31 f, pode ser, p.ex. se mtu for descendo numa rede. e s\'f3 reune no destino\
+32 mtu wireless \'e9 menor que mtu de wired? s, v\
+33 f, melhor gestao -> menor gasto\
+34 \
+35 v\
+36 falso, tem pouco a ver\
+37 nao existem hubs comutados, senao eram switches\
+	se nao dissesse comutado, era verdadeira pois a velocidade entre a porta e a norma sao compativeis (ambas a 1000mbps)\
+38 se localizacao \'e9 a porta, \'e9 verdade\
+39 v\
+40 f, se nao compreendem ip, como os interpretam para os recusar?\
+41 v\
+42 f, 102400*9/112000 = 8.---- < 9\
+velocidades = *1000\
+dados =*1024\
+\
+Grupo II\
+\
+1\
+\
+b)\
+\
+SREJ -> rejeicao selectiva\
+RR 2 -> Sliding Window\
+\
+c)\
+\
+x = 0, pois nenhum foi rejeitado\
+y = 7, \
+\
+a numeracao pode ser de 0 a 7, ou de 1 a 8.\
+dai o x podia ser 0 ou 8, respectivamente\
+\
+maximo permitido \'e9 8, o minimo \'e9 3\
+d)\
+\
+slide\
+\
+2\
+\
+a)\
+\
+queremos 100% de utilizacao, logo w >1 mas n mt senao buffers enchem non stop\
+\
+b)\
+\
+3\
+\
+a)\
+ver csma \'e9 so copiar\
+uma pergunta destas, copiar dos slides, n sair\'e1. comentar passos talvez\
+\
+b)\
+calcular, etc\
+\
+Grupo III\
+\
+1\
+a)\
+\
+A \
+160.30.0.0 160.30.0.1 255.255.0.0 Eth0\
+0.0.0.0 160.30.0.254 255.255.0.0 Eth0\
+\
+C\
+tres redes, as suas interfaces\
+omissao para a D = default 160.60.0.253\
+\
+D\
+duas redes que ta ligado\
+rede do a\
+rede do b\
+omissao para isp\
+\
+ALGORTIMO\
+>>se ta ligado \'e0 rede\
+endereco da rede, meu ip nessa rede, mascara, minha interface\
+\
+>>se nao ta ligado \'e0 rede\
+default (ou rede), endere\'e7o ip do gateway, mascara, minha interface \
+\
+b)\
+substituir a rota no d\
+\
+D\
+160.30.0.0 160.60.0.254/15 Fe0\
+\
+c)\
+\
+precisamos de 3 redes, logo precisamos de 3 bits, pois duas redes nao podem ser usadas (00 e 11)\
+/19\
+\
+\
+da\'ed: se tentassemos usar /18, tinhamos as redes 00 01 10 11 mas 00 e 11 nao podem ser usados, logo temos s\'f3 2 redes, e precisamos de 3.\
+se usarmos /19, temos as redes 001 010 011 100 101 110 disponiveis, que j\'e1 d\'e1\
+\
+podem ficar\
+\
+160.60.32.0\
+160.60.64.0\
+160.60.96.0}
