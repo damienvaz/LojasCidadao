@@ -65,48 +65,72 @@ namespace LojasCidadao.Controllers
             }
         }
 
-        public ActionResult Detalhes(int id)
+        public ActionResult Detalhes(String id)
         {
-            LojaCidadao l = lista.getLojaPorID(id);
-            if (l == null)
+            try
             {
-                return View("NotFound");
+                int id_l = Convert.ToInt32(id);
+                LojaCidadao l = lista.getLojaPorID(id_l);
+                if (l == null)
+                {
+                    return View("NotFound");
+                }
+                else
+                {
+                    ViewData["Distrito"] = lista.nomeDistrito(id_l);
+                    ViewData["Concelho"] = lista.nomeConcelho(id_l);
+                    return View(l);
+                }
             }
-            else
+            catch
             {
-                ViewData["Distrito"] = lista.nomeDistrito(id);
-                ViewData["Concelho"] = lista.nomeConcelho(id);
-                return View(l);
+                return View("Error");
             }
         }
 
-        public ActionResult Mapa(int id)
+        public ActionResult Mapa(String id)
         {
-            LojaCidadao l = lista.getLojaPorID(id);
-            if (l == null)
+            try
             {
-                return View("NotFound");
+                int id_l = Convert.ToInt32(id);
+                LojaCidadao l = lista.getLojaPorID(id_l);
+                if (l == null)
+                {
+                    return View("NotFound");
+                }
+                else
+                {
+                    ViewData["Lat"] = Convert.ToDouble(l.getLatitude());
+                    ViewData["Lon"] = Convert.ToDouble(l.getLongitude());
+                    return View(l);
+                }
             }
-            else
+            catch
             {
-                ViewData["Lat"] = Convert.ToDouble(l.getLatitude());
-                ViewData["Lon"] = Convert.ToDouble(l.getLongitude());
-                return View(l);
+                return View("Error");
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(String id)
         {
-            List<String> lojas = lista.getTodosConcelhos();
-            LojaCidadao l = lista.getLojaPorID(id);
-            if (l == null)
+            try
             {
-                return View("NotFound");
+                int id_l = Convert.ToInt32(id);
+                List<String> lojas = lista.getTodosConcelhos();
+                LojaCidadao l = lista.getLojaPorID(id_l);
+                if (l == null)
+                {
+                    return View("NotFound");
+                }
+                else
+                {
+                    ViewData["Concelhos"] = new SelectList(lojas);
+                    return View(l);
+                }
             }
-            else
+            catch
             {
-                ViewData["Concelhos"] = new SelectList(lojas);
-                return View(l);
+                return View("Error");
             }
         }
 
@@ -222,14 +246,22 @@ namespace LojasCidadao.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(String id)
         {
-            LojaCidadao l = lista.getLojaPorID(id);
-            if (l == null)
+            try
             {
-                return View("NotFound");
+                int id_l = Convert.ToInt32(id);
+                LojaCidadao l = lista.getLojaPorID(id_l);
+                if (l == null)
+                {
+                    return View("NotFound");
+                }
+                else return View(l);
             }
-            else return View(l);
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -244,27 +276,43 @@ namespace LojasCidadao.Controllers
         //--------------BALCOES----------------------------------------------------
 
 
-        public ActionResult Balcoes(int id)
+        public ActionResult Balcoes(String id)
         {
-            ViewData["Loja"] = id;
-            var balcoes = lista.getBalcoesDeLoja(id);
-            return View("Balcoes", balcoes);
+            try
+            {
+                int id_l = Convert.ToInt32(id);
+                ViewData["Loja"] = id_l;
+                var balcoes = lista.getBalcoesDeLoja(id_l);
+                return View("Balcoes", balcoes);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
-        public ActionResult CreateBalcao(int id)
+        public ActionResult CreateBalcao(String id)
         {
-            LojaCidadao l = lista.getLojaPorID(id);
-            if (l == null)
+            try
             {
-                return View("NotFound");
+                int id_l = Convert.ToInt32(id);
+                LojaCidadao l = lista.getLojaPorID(id_l);
+                if (l == null)
+                {
+                    return View("NotFound");
+                }
+                else
+                {
+                    Balcao b = new Balcao(l.getId(), 0, true, "");
+                    List<String> entidades = lista.listaEntidadesAsStrings();
+                    ViewData["Entidades"] = new SelectList(entidades);
+                    ViewData["LojaID"] = l.getId();
+                    return View(b);
+                }
             }
-            else
+            catch
             {
-                Balcao b = new Balcao(l.getId(), 0, true, "");
-                List<String> entidades = lista.listaEntidadesAsStrings();
-                ViewData["Entidades"] = new SelectList(entidades);
-                ViewData["LojaID"] = l.getId();
-                return View(b);
+                return View("Error");
             }
         }
 
@@ -320,17 +368,24 @@ namespace LojasCidadao.Controllers
 
         public ActionResult EditBalcao(String id)
         {
-            char[] delimiterChars = { '-' };
-            string[] palavras = id.Split(delimiterChars);
-            int id_loja = Convert.ToInt32(palavras[0]);
-            int id_entidade = Convert.ToInt32(palavras[1]);
-            Balcao b = lista.getBalcaoPorID(id_loja, id_entidade);
-            ViewData["Loja"] = id_loja;
-            if (b == null)
+            try
             {
-                return View("NotFoundBalcao");
+                char[] delimiterChars = { '-' };
+                string[] palavras = id.Split(delimiterChars);
+                int id_loja = Convert.ToInt32(palavras[0]);
+                int id_entidade = Convert.ToInt32(palavras[1]);
+                Balcao b = lista.getBalcaoPorID(id_loja, id_entidade);
+                ViewData["Loja"] = id_loja;
+                if (b == null)
+                {
+                    return View("NotFoundBalcao");
+                }
+                else return View(b);
             }
-            else return View(b);
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -367,20 +422,27 @@ namespace LojasCidadao.Controllers
 
         public ActionResult DeleteBalcao(String id)
         {
-            char[] delimiterChars = { '-' };
-            string[] palavras = id.Split(delimiterChars);
-            int id_loja = Convert.ToInt32(palavras[0]);
-            int id_entidade = Convert.ToInt32(palavras[1]);
-            Balcao b = lista.getBalcaoPorID(id_loja, id_entidade);
-            if (b == null)
+            try
             {
-                return View("NotFoundBalcao");
+                char[] delimiterChars = { '-' };
+                string[] palavras = id.Split(delimiterChars);
+                int id_loja = Convert.ToInt32(palavras[0]);
+                int id_entidade = Convert.ToInt32(palavras[1]);
+                Balcao b = lista.getBalcaoPorID(id_loja, id_entidade);
+                if (b == null)
+                {
+                    return View("NotFoundBalcao");
+                }
+                else
+                {
+                    ViewData["Loja"] = id_loja;
+                    return View(b);
+                }
             }
-            else
+            catch
             {
-                ViewData["Loja"] = id_loja;
-                return View(b);
-            } 
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -399,44 +461,58 @@ namespace LojasCidadao.Controllers
 
         public ActionResult ServicosBalcao(String id)
         {
-            char[] delimiterChars = { '-' };
-            string[] palavras = id.Split(delimiterChars);
-            int id_loja = Convert.ToInt32(palavras[0]);
-            int id_entidade = Convert.ToInt32(palavras[1]);
+            try
+            {
+                char[] delimiterChars = { '-' };
+                string[] palavras = id.Split(delimiterChars);
+                int id_loja = Convert.ToInt32(palavras[0]);
+                int id_entidade = Convert.ToInt32(palavras[1]);
 
-            ViewData["Loja"] = id_loja;
-            ViewData["Entidade"] = id_entidade;
-            var servicos = lista.getServicosDeBalcao(id_loja, id_entidade);
-            return View("ServicosBalcao", servicos);
+                ViewData["Loja"] = id_loja;
+                ViewData["Entidade"] = id_entidade;
+                var servicos = lista.getServicosDeBalcao(id_loja, id_entidade);
+                return View("ServicosBalcao", servicos);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         public ActionResult CreateServicoBalcao(String id)
         {
-            char[] delimiterChars = { '-' };
-            string[] palavras = id.Split(delimiterChars);
-            int id_loja = Convert.ToInt32(palavras[0]);
-            int id_entidade = Convert.ToInt32(palavras[1]);
-            LojaCidadao l = lista.getLojaPorID(id_loja);
-            if (l == null)
+            try
             {
-                return View("NotFound");
-            }
-            else
-            {
-                Balcao b = lista.getBalcaoPorID(id_loja, id_entidade);
-                if (b == null)
+                char[] delimiterChars = { '-' };
+                string[] palavras = id.Split(delimiterChars);
+                int id_loja = Convert.ToInt32(palavras[0]);
+                int id_entidade = Convert.ToInt32(palavras[1]);
+                LojaCidadao l = lista.getLojaPorID(id_loja);
+                if (l == null)
                 {
-                    return View("NotFoundBalcao");
+                    return View("NotFound");
                 }
                 else
                 {
-                    RelacaoBalcaoServico r = new RelacaoBalcaoServico(id_loja, id_entidade, 0, true, "");
-                    List<String> servicos = lista.listaNomesServicosPorEntidade(id_entidade);
-                    ViewData["LojaID"] = id_loja;
-                    ViewData["EntidadeID"] = id_entidade;
-                    ViewData["Servicos"] = new SelectList(servicos);
-                    return View(r);
+                    Balcao b = lista.getBalcaoPorID(id_loja, id_entidade);
+                    if (b == null)
+                    {
+                        return View("NotFoundBalcao");
+                    }
+                    else
+                    {
+                        RelacaoBalcaoServico r = new RelacaoBalcaoServico(id_loja, id_entidade, 0, true, "");
+                        List<String> servicos = lista.listaNomesServicosPorEntidade(id_entidade);
+                        ViewData["LojaID"] = id_loja;
+                        ViewData["EntidadeID"] = id_entidade;
+                        ViewData["Servicos"] = new SelectList(servicos);
+                        return View(r);
+                    }
                 }
+            }
+            catch
+            {
+                return View("Error");
             }
         }
 
@@ -496,19 +572,26 @@ namespace LojasCidadao.Controllers
 
         public ActionResult EditServicoBalcao(String id)
         {
-            char[] delimiterChars = { '-' };
-            string[] palavras = id.Split(delimiterChars);
-            int id_loja = Convert.ToInt32(palavras[0]);
-            int id_entidade = Convert.ToInt32(palavras[1]);
-            int id_servico = Convert.ToInt32(palavras[2]);
-            RelacaoBalcaoServico r = lista.getServicoDeBalcaoPorID(id_loja, id_entidade, id_servico);
-            ViewData["Loja"] = id_loja;
-            ViewData["Entidade"] = id_entidade;
-            if (r == null)
+            try
             {
-                return View("NotFoundServicoDeBalcao");
+                char[] delimiterChars = { '-' };
+                string[] palavras = id.Split(delimiterChars);
+                int id_loja = Convert.ToInt32(palavras[0]);
+                int id_entidade = Convert.ToInt32(palavras[1]);
+                int id_servico = Convert.ToInt32(palavras[2]);
+                RelacaoBalcaoServico r = lista.getServicoDeBalcaoPorID(id_loja, id_entidade, id_servico);
+                ViewData["Loja"] = id_loja;
+                ViewData["Entidade"] = id_entidade;
+                if (r == null)
+                {
+                    return View("NotFoundServicoDeBalcao");
+                }
+                else return View(r);
             }
-            else return View(r);
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -546,22 +629,29 @@ namespace LojasCidadao.Controllers
 
         public ActionResult DeleteServicoBalcao(String id)
         {
-            char[] delimiterChars = { '-' };
-            string[] palavras = id.Split(delimiterChars);
-            int id_loja = Convert.ToInt32(palavras[0]);
-            int id_entidade = Convert.ToInt32(palavras[1]);
-            int id_servico = Convert.ToInt32(palavras[2]);
-            RelacaoBalcaoServico r = lista.getServicoDeBalcaoPorID(id_loja, id_entidade, id_servico);
-            if (r == null)
+            try
             {
-                return View("NotFoundServicoBalcao");
+                char[] delimiterChars = { '-' };
+                string[] palavras = id.Split(delimiterChars);
+                int id_loja = Convert.ToInt32(palavras[0]);
+                int id_entidade = Convert.ToInt32(palavras[1]);
+                int id_servico = Convert.ToInt32(palavras[2]);
+                RelacaoBalcaoServico r = lista.getServicoDeBalcaoPorID(id_loja, id_entidade, id_servico);
+                if (r == null)
+                {
+                    return View("NotFoundServicoBalcao");
+                }
+                else
+                {
+                    ViewData["Loja"] = id_loja;
+                    ViewData["Entidade"] = id_entidade;
+                    return View(r);
+                }
             }
-            else
+            catch
             {
-                ViewData["Loja"] = id_loja;
-                ViewData["Entidade"] = id_entidade;
-                return View(r);
-            } 
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -576,6 +666,5 @@ namespace LojasCidadao.Controllers
             lista.deleteServicoDeBalcao(r);
             return View("DeletedServicoBalcao");
         }
-
     }
 }

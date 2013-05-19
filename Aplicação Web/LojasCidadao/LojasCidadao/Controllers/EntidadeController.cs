@@ -53,24 +53,40 @@ namespace LojasCidadao.Controllers
             }
         }
 
-        public ActionResult Detalhes(int id)
+        public ActionResult Detalhes(String id)
         {
-            Entidade e = lista.getEntidadePorID(id);
-            if (e == null)
+            try
             {
-                return View("NotFound");
+                int id_e = Convert.ToInt32(id);
+                Entidade e = lista.getEntidadePorID(id_e);
+                if (e == null)
+                {
+                    return View("NotFound");
+                }
+                else return View(e);
             }
-            else return View(e);
+            catch
+            {
+                return View("Error");
+            }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(String id)
         {
-            Entidade e = lista.getEntidadePorID(id);
-            if (e == null)
+            try
             {
-                return View("NotFound");
+                int id_e = Convert.ToInt32(id);
+                Entidade e = lista.getEntidadePorID(id_e);
+                if (e == null)
+                {
+                    return View("NotFound");
+                }
+                else return View(e);
             }
-            else return View(e);
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -141,14 +157,22 @@ namespace LojasCidadao.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(String id)
         {
-            Entidade e = lista.getEntidadePorID(id);
-            if (e == null)
+            try
             {
-                return View("NotFound");
+                int id_e = Convert.ToInt32(id);
+                Entidade e = lista.getEntidadePorID(id_e);
+                if (e == null)
+                {
+                    return View("NotFound");
+                }
+                else return View(e);
             }
-            else return View(e);
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

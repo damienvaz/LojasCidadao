@@ -64,32 +64,48 @@ namespace LojasCidadao.Controllers
             }
         }
 
-        public ActionResult Detalhes(int id)
+        public ActionResult Detalhes(String id)
         {
-            Servico s = lista.getServicoPorID(id);
-            if (s == null)
+            try
             {
-                return View("NotFound");
+                int id_s = Convert.ToInt32(id);
+                Servico s = lista.getServicoPorID(id_s);
+                if (s == null)
+                {
+                    return View("NotFound");
+                }
+                else
+                {
+                    ViewData["Entidade"] = lista.nomeEntidade(id_s);
+                    return View(s);
+                }
             }
-            else
+            catch
             {
-                ViewData["Entidade"] = lista.nomeEntidade(id);
-                return View(s);
-            } 
+                return View("Error");
+            }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(String id)
         {
-            List<String> entidades = lista.listaEntidadesAsStrings();
-            Servico s = lista.getServicoPorID(id);
-            if (s == null)
+            try
             {
-                return View("NotFound");
+                int id_s = Convert.ToInt32(id);
+                List<String> entidades = lista.listaEntidadesAsStrings();
+                Servico s = lista.getServicoPorID(id_s);
+                if (s == null)
+                {
+                    return View("NotFound");
+                }
+                else
+                {
+                    ViewData["Entidades"] = new SelectList(entidades);
+                    return View(s);
+                }
             }
-            else
+            catch
             {
-                ViewData["Entidades"] = new SelectList(entidades);
-                return View(s);
+                return View("Error");
             }
         }
 
@@ -178,14 +194,22 @@ namespace LojasCidadao.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(String id)
         {
-            Servico s = lista.getServicoPorID(id);
-            if (s == null)
+            try
             {
-                return View("NotFound");
+                int id_s = Convert.ToInt32(id);
+                Servico s = lista.getServicoPorID(id_s);
+                if (s == null)
+                {
+                    return View("NotFound");
+                }
+                else return View(s);
             }
-            else return View(s);
+            catch
+            {
+                return View("Error");
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
