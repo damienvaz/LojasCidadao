@@ -13,6 +13,7 @@ namespace LojasCidadao.Models
         ListaServico servicos;
         ListaLojaCidacao lojas;
         ListaBalcao balcoes;
+        Autenticar login;
 
         public SistemaLojasCidadao()
         {
@@ -23,6 +24,7 @@ namespace LojasCidadao.Models
             servicos = new ListaServico(con);
             lojas = new ListaLojaCidacao(con);
             balcoes = new ListaBalcao(con);
+            login = new Autenticar(con);
         }
 
         public List<Entidade> getTodasEntidades()
@@ -218,6 +220,11 @@ namespace LojasCidadao.Models
         public void updateServicoDeBalcao(RelacaoBalcaoServico r)
         {
             balcoes.updateServicoDeBalcao(r);
+        }
+
+        public Funcionario autenticar(String nick)
+        {
+            return login.getFuncionario(nick);
         }
     }
 }

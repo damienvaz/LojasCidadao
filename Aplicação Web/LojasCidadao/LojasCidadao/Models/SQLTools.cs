@@ -105,5 +105,9 @@ namespace LojasCidadao.Models
         public abstract String getQueryDeleteServicoDeBalcao(RelacaoBalcaoServico r);
 
         public abstract String getQueryUpdateServicoDeBalcao(RelacaoBalcaoServico r);
+        
+        //-------------LOG IN------------------------------------
+
+        public abstract String getQueryLogIn(String nick);
     }
 }

@@ -13,17 +13,20 @@ namespace LojasCidadao.Controllers
         //
         // GET: /Entidade/
 
+        [Authorize]
         public ActionResult Index()
         {
             var entidades = lista.getTodasEntidades();
             return View("Index",entidades);
         }
 
+        [Authorize]
         public ActionResult Procura()
         {
             return View("Procura");
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Procura(FormCollection formValues)
         {
@@ -53,6 +56,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Detalhes(String id)
         {
             try
@@ -71,6 +75,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Edit(String id)
         {
             try
@@ -89,6 +94,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection formValues)
         {
@@ -117,12 +123,14 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             Entidade e = new Entidade();
             return View(e);
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Entidade e)
         {
@@ -157,6 +165,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Delete(String id)
         {
             try
@@ -175,6 +184,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Delete(int id, string confirmButton)
         {

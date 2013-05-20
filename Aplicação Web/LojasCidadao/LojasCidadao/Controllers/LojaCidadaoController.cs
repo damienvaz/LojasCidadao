@@ -13,12 +13,14 @@ namespace LojasCidadao.Controllers
         //
         // GET: /LojaCidadao/
 
+        [Authorize]
         public ActionResult Index()
         {
             var lojas = lista.getTodasLojas();
             return View("Index", lojas);
         }
 
+        [Authorize]
         public ActionResult Procura()
         {
             List<String> concelhos = lista.getTodosConcelhos();
@@ -26,6 +28,7 @@ namespace LojasCidadao.Controllers
             return View("Procura");
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Procura(FormCollection formValues)
         {
@@ -65,6 +68,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Detalhes(String id)
         {
             try
@@ -88,6 +92,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Mapa(String id)
         {
             try
@@ -111,6 +116,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Edit(String id)
         {
             try
@@ -134,6 +140,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection formValues)
         {
@@ -183,6 +190,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             List<String> lojas = lista.getTodosConcelhos();
@@ -191,6 +199,7 @@ namespace LojasCidadao.Controllers
             return View(l);
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(LojaCidadao l)
         {
@@ -246,6 +255,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Delete(String id)
         {
             try
@@ -264,6 +274,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Delete(int id, string confirmButton)
         {
@@ -275,7 +286,7 @@ namespace LojasCidadao.Controllers
 
         //--------------BALCOES----------------------------------------------------
 
-
+        [Authorize]
         public ActionResult Balcoes(String id)
         {
             try
@@ -291,6 +302,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult CreateBalcao(String id)
         {
             try
@@ -316,6 +328,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateBalcao(Balcao b)
         {
@@ -366,6 +379,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult EditBalcao(String id)
         {
             try
@@ -388,6 +402,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditBalcao(String id, FormCollection formValues)
         {
@@ -420,6 +435,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult DeleteBalcao(String id)
         {
             try
@@ -445,6 +461,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DeleteBalcao(String id, string confirmButton)
         {
@@ -459,6 +476,7 @@ namespace LojasCidadao.Controllers
 
         //----------SERVICOS DE BALCOES---------------------------------
 
+        [Authorize]
         public ActionResult ServicosBalcao(String id)
         {
             try
@@ -479,6 +497,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult CreateServicoBalcao(String id)
         {
             try
@@ -516,6 +535,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateServicoBalcao(RelacaoBalcaoServico r)
         {
@@ -570,6 +590,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult EditServicoBalcao(String id)
         {
             try
@@ -594,6 +615,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditServicoBalcao(String id, FormCollection formValues)
         {
@@ -627,6 +649,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult DeleteServicoBalcao(String id)
         {
             try
@@ -654,6 +677,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DeleteServicoBalcao(String id, string confirmButton)
         {

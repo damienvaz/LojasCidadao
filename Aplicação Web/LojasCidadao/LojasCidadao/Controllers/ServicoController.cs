@@ -13,12 +13,14 @@ namespace LojasCidadao.Controllers
         //
         // GET: /Servico/
 
+        [Authorize]
         public ActionResult Index()
         {
             var servicos = lista.getTodosServicos();
             return View("Index",servicos);
         }
 
+        [Authorize]
         public ActionResult Procura()
         {
             List<String> entidades = lista.listaEntidadesAsStrings();
@@ -26,6 +28,7 @@ namespace LojasCidadao.Controllers
             return View("Procura");
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Procura(FormCollection formValues)
         {
@@ -64,6 +67,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Detalhes(String id)
         {
             try
@@ -86,6 +90,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Edit(String id)
         {
             try
@@ -109,6 +114,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection formValues)
         {
@@ -145,6 +151,7 @@ namespace LojasCidadao.Controllers
             }            
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             Servico s = new Servico();
@@ -153,6 +160,7 @@ namespace LojasCidadao.Controllers
             return View(s);
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Servico s)
         {
@@ -194,6 +202,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Delete(String id)
         {
             try
@@ -212,6 +221,7 @@ namespace LojasCidadao.Controllers
             }
         }
 
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Delete(int id, string confirmButton)
         {

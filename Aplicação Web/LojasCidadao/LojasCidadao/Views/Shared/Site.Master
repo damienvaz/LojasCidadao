@@ -67,7 +67,23 @@
 
                   <ul class="right">
                         <li class="divider"></li>
-                        <li><% Html.RenderPartial("LogOnUserControl"); %></li>
+                            <%
+                                if (Request.IsAuthenticated) {
+                            %>
+                                        <li class="has-dropdown">
+                                            <a>Welcome <%: Page.User.Identity.Name %>!</a>
+                                                <ul class="dropdown">
+                                                    <li><%: Html.ActionLink("Log Off ", "LogOff", "Autenticar") %></li>
+                                                </ul>
+                                        </li>
+                            <%
+                                }
+                                else {
+                            %> 
+                                    <li><%: Html.ActionLink("Log On", "LogOn", "Autenticar") %></li>
+                            <%
+                                }
+                            %>
                         <li class="divider"></li>
                   </ul>
                </section>

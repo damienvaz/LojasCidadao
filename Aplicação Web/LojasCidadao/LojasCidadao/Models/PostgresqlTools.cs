@@ -251,5 +251,13 @@ namespace LojasCidadao.Models
             string query = "UPDATE public.relacoes_balcao_servico SET estado_servico_balcao='" + r.isEstado() + "' WHERE id_loja_cidadao =" + r.getLojaID() + " AND id_entidade =" + r.getEntidadeID() + " AND id_servico =" + r.getServicoID() + ";";
             return query;
         }
+
+        //---------------LOG IN------------------------------
+
+        public override string getQueryLogIn(string nick)
+        {
+            string query = "SELECT * FROM public.funcionarios WHERE codigo_funcionario ='" + nick + "';";
+            return query;
+        }
     }
 }

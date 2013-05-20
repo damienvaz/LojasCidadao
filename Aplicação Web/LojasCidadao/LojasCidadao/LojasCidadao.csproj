@@ -98,19 +98,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EntidadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AutenticarController.cs" />
     <Compile Include="Controllers\LojaCidadaoController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Autenticar.cs" />
     <Compile Include="Models\Balcao.cs" />
     <Compile Include="Models\DataBaseTools.cs" />
     <Compile Include="Models\DataBaseUser.cs" />
     <Compile Include="Models\Entidade.cs" />
+    <Compile Include="Models\Funcionario.cs" />
     <Compile Include="Models\ListaBalcao.cs" />
     <Compile Include="Models\ListaEntidade.cs" />
     <Compile Include="Models\ListaLojaCidacao.cs" />
@@ -220,6 +221,7 @@
     <Content Include="Views\Entidade\NotFound.aspx" />
     <Content Include="Views\Entidade\Procura.aspx" />
     <Content Include="Views\Entidade\ResultadosProcura.aspx" />
+    <Content Include="Views\Autenticar\LogOn.aspx" />
     <Content Include="Views\LojaCidadao\Balcoes.aspx" />
     <Content Include="Views\LojaCidadao\Create.aspx" />
     <Content Include="Views\LojaCidadao\CreateBalcao.aspx" />
@@ -269,14 +271,9 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Account\ChangePassword.aspx" />
-    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
-    <Content Include="Views\Account\LogOn.aspx" />
-    <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>

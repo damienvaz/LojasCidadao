@@ -232,5 +232,12 @@ namespace LojasCidadao.Models
         {
             return bd.getQueryUpdateServicoDeBalcao(r);
         }
+
+        //---------------LOG IN---------------------------------------
+
+        public static String getQueryLogIn(String nick)
+        {
+            return bd.getQueryLogIn(nick);
+        }
     }
 }
