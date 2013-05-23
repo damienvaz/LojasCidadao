@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LCidadao</string>
+    <string name="map_name">Mapa da Loja Cidadao</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="button1">Lojas</string>
+    <string name="button2">Balcao</string>
+    <string name="button3">Map</string>
+    <string name="none"/>
+    <string name="infoLojaNome">Nome : </string>
+    <string name="infoLojaMorada">Morada : </string>
+    <string name="infoLojaCodigoPostal">Codigo Postal :</string>
+    <string name="infoLojaDistrito">Distrito :</string>
+    <string name="infoLojaConcelho">Concelho :</string>
+    <string name="infoLojaTelefone">Telefone : </string>
+
+</resources>
