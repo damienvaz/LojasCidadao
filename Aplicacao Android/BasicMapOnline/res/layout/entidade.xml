@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeNome" />
+
+        <TextView
+            android:id="@+id/entidadeNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	</LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeSigla" />
+
+        <TextView
+            android:id="@+id/entidadeSigla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeMorada" />
+
+        <TextView
+            android:id="@+id/entidadeMorada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeTelefone" />
+
+        <TextView
+            android:id="@+id/entidadeTelefone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:clickable="true"/>
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeFax" />
+
+        <TextView
+            android:id="@+id/entidadeFax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeEmail" />
+
+        <TextView
+            android:id="@+id/entidadeEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:clickable="true"/>
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeURL" />
+
+        <TextView
+            android:id="@+id/entidadeURL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:clickable="true"/>
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/entidadeSite" />
+
+        <TextView
+            android:id="@+id/entidadeSite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"/>
+	</LinearLayout>
+
+    <Button
+        android:id="@+id/entidadeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+</LinearLayout>
