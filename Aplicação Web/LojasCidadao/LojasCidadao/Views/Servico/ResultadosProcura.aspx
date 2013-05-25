@@ -12,12 +12,14 @@
     <thead>
         <tr>
             <th>Nome</th>
+            <th>Tipo</th>
             <th></th>
         </tr>
     </thead>
     <% foreach (var item in Model) { %>
         <tr>
             <td><%= Html.Encode(item.getNome()) %></td>
+            <td><%= Html.Encode(item.getTipo()) %></td>
             <td><%= Html.ActionLink("Detalhes", "Detalhes", new { id = item.getID() })%></td>
         </tr>
     <% } %>

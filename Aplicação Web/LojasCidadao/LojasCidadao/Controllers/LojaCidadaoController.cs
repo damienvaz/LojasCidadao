@@ -520,7 +520,7 @@ namespace LojasCidadao.Controllers
                     }
                     else
                     {
-                        RelacaoBalcaoServico r = new RelacaoBalcaoServico(id_loja, id_entidade, 0, true, "");
+                        RelacaoBalcaoServico r = new RelacaoBalcaoServico(id_loja, id_entidade, 0, true, "","");
                         List<String> servicos = lista.listaNomesServicosPorEntidade(id_entidade);
                         ViewData["LojaID"] = id_loja;
                         ViewData["EntidadeID"] = id_entidade;

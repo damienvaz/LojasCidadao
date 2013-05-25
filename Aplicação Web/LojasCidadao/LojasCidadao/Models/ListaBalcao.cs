@@ -121,7 +121,7 @@ namespace LojasCidadao.Models
 
         private RelacaoBalcaoServico relacaoFromRS(NpgsqlDataReader reader)
         {
-            RelacaoBalcaoServico r = new RelacaoBalcaoServico(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetBoolean(3), reader.GetValue(4).ToString());
+            RelacaoBalcaoServico r = new RelacaoBalcaoServico(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetBoolean(3), reader.GetValue(4).ToString(), reader.GetValue(5).ToString());
             return r;
         }
     }

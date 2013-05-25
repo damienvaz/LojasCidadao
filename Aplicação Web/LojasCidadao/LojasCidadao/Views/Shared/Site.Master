@@ -71,7 +71,7 @@
                                 if (Request.IsAuthenticated) {
                             %>
                                         <li class="has-dropdown">
-                                            <a>Welcome <%: Page.User.Identity.Name %>!</a>
+                                            <a>Benvindo <%: Page.User.Identity.Name %>!</a>
                                                 <ul class="dropdown">
                                                     <li><%: Html.ActionLink("Log Off ", "LogOff", "Autenticar") %></li>
                                                 </ul>
