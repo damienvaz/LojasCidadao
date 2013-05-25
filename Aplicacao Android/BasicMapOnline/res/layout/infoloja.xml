@@ -96,7 +96,8 @@
         <TextView
             android:id="@+id/infoLojaTelefone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:clickable="true" />
 
     </LinearLayout>
     
@@ -111,14 +112,14 @@
             android:id="@+id/infoLojaMapa"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:text="Go To Mapa" />
+        	android:text="@string/infoLojaBotaoMapa" />
         
         <Button 
             android:layout_weight="50"
             android:id="@+id/infoLojaBalcoes"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:text="Balcoes" />
+        	android:text="@string/infoLojaBotaoBalcoes" />
     </LinearLayout>
 
 </LinearLayout>

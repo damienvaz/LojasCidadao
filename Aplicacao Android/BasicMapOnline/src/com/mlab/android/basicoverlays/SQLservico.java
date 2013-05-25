@@ -1,61 +1,23 @@
 package com.mlab.android.basicoverlays;
 
 public class SQLservico {
-
-	private Integer id_loja_cidadao;
-	private Integer id_entidade;
-	private Integer id_servico;
-	private Boolean estado_servico_balcao;
 	private String nome_servico;
+	private String descricao_servico;
+	private String tipo_servico;
+	private String url_servico;
 	
-	public SQLservico( Integer id_loja_cidadao, Integer id_entidade,Integer id_servico, Boolean estado_servico_balcao, String nome_servico){
-		this.id_servico = id_servico;
-		this.id_entidade = id_entidade;
+	public SQLservico(String nome_servico,String descricao_servico,String tipo_servico,String url_servico){
 		this.nome_servico = nome_servico;
-		this.id_loja_cidadao = id_loja_cidadao;
-		this.estado_servico_balcao = estado_servico_balcao;
+		this.descricao_servico = descricao_servico;
+		this.tipo_servico = tipo_servico;
+		this.url_servico = url_servico;
 	}
 	
 	public SQLservico(SQLservico servico){
-		this.id_servico = servico.getId_servico();
-		this.id_entidade = servico.getId_entidade();
 		this.nome_servico = servico.getNome_servico();
-		this.id_loja_cidadao = servico.getId_loja_cidadao();
-		this.estado_servico_balcao = servico.getEstado_servico_balcao();
-	}
-
-	
-	
-	public Integer getId_loja_cidadao() {
-		return this.id_loja_cidadao;
-	}
-
-	public void setId_loja_cidadao(Integer id_loja_cidadao) {
-		this.id_loja_cidadao = id_loja_cidadao;
-	}
-
-	public Integer getId_entidade() {
-		return this.id_entidade;
-	}
-
-	public void setId_entidade(Integer id_entidade) {
-		this.id_entidade = id_entidade;
-	}
-
-	public Integer getId_servico() {
-		return this.id_servico;
-	}
-
-	public void setId_servico(Integer id_servico) {
-		this.id_servico = id_servico;
-	}
-
-	public Boolean getEstado_servico_balcao() {
-		return this.estado_servico_balcao;
-	}
-
-	public void setEstado_servico_balcao(Boolean estado_servico_balcao) {
-		this.estado_servico_balcao = estado_servico_balcao;
+		this.descricao_servico = servico.getDescricao_servico();
+		this.tipo_servico = servico.getTipo_servico();
+		this.url_servico = servico.getUrl_servico();
 	}
 
 	public String getNome_servico() {
@@ -66,6 +28,30 @@ public class SQLservico {
 		this.nome_servico = nome_servico;
 	}
 
+	public String getDescricao_servico() {
+		return this.descricao_servico;
+	}
+
+	public void setDescricao_servico(String descricao_servico) {
+		this.descricao_servico = descricao_servico;
+	}
+
+	public String getTipo_servico() {
+		return this.tipo_servico;
+	}
+
+	public void setTipo_servico(String tipo_servico) {
+		this.tipo_servico = tipo_servico;
+	}
+
+	public String getUrl_servico() {
+		return this.url_servico;
+	}
+
+	public void setUrl_servico(String url_servico) {
+		this.url_servico = url_servico;
+	}
+	
 	public SQLservico clone(){
 		return new SQLservico(this);
 	}

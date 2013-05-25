@@ -21,6 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.mlab.android.basicoverlays.PostgreSQL;
@@ -87,14 +88,6 @@ public class Mapa extends MapActivity{
 
 
     }
-	
-	//Botao para retroceder ( Action Bar)
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
-		return true;
-	}
 
     public class CapaTap extends ArrayItemizedOverlay {
 		private final Context context;
@@ -130,12 +123,35 @@ public class Mapa extends MapActivity{
 		
 	}
     
+   
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.activity_main, menu);
+    	MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.homeactionbar, menu);
+    	
+    	return true;
     }
+    
+  //Botao para retroceder ( Action Bar)
+  	@Override
+  	public boolean onOptionsItemSelected(MenuItem item) {
+  		// TODO Auto-generated method stub
+  		if(item.getItemId()==R.id.lojasHome){
+  			Intent intent = new Intent("com.example.basicmaponline.MENU");
+              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              startActivity(intent);
+  		}
+  		else {
+  			super.onBackPressed();
+  		}
+  		
+  		return true;
+  	}
+    
+    
     
     public class loadDatabase extends AsyncTask<Void, Void, ArrayList<SQLloja>>{
 

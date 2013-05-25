@@ -9,10 +9,13 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import com.mlab.android.basicoverlays.PostgreSQL;
 import com.mlab.android.basicoverlays.SQLloja;
 
@@ -51,13 +54,33 @@ public class Lojas extends ListActivity{
 		
 		setListAdapter(new ArrayAdapter<String>(Lojas.this, android.R.layout.simple_list_item_1,lista));
 	}
+	
+	
 
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		//return super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.homeactionbar, menu);
+	    return true;
+	}
+
+
+
+
 	/*Serve para meter o botao de retorno na ActionBar ! */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		super.onBackPressed();
-		
+		if(item.getItemId()==R.id.lojasHome){
+			Intent intent = new Intent("com.example.basicmaponline.MENU");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+		}
+		else {
+			super.onBackPressed();
+		}
 		return true;
 	}
 

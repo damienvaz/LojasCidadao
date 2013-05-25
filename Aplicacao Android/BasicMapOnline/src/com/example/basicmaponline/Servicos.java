@@ -4,11 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import com.example.basicmaponline.Lojas.loadDatabase;
 import com.mlab.android.basicoverlays.PostgreSQL;
-import com.mlab.android.basicoverlays.SQLbalcao;
-import com.mlab.android.basicoverlays.SQLloja;
-import com.mlab.android.basicoverlays.SQLservico;
+import com.mlab.android.basicoverlays.SQLrelacaoBalcaoServico;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
@@ -24,7 +21,7 @@ import android.widget.ListView;
 
 public class Servicos extends ListActivity{
 
-	ArrayList<SQLservico> listaServico;
+	ArrayList<SQLrelacaoBalcaoServico> listaServico;
 	String lista[];
 	Integer id_entidade;
 	Integer id_loja;
@@ -58,7 +55,7 @@ public class Servicos extends ListActivity{
 		
 		lista = new String[listaServico.size()];
 		int i = 0;
-		for(SQLservico balcao : listaServico){
+		for(SQLrelacaoBalcaoServico balcao : listaServico){
 			lista[i++] = balcao.getNome_servico() ;
 		}
 		
@@ -71,9 +68,9 @@ public class Servicos extends ListActivity{
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 		
-		//Intent ourIntent = new Intent("com.example.basicmaponline.INFOLOJA");
-		//ourIntent.putExtra("loja", listaLoja.get(position));
-		// startActivity(ourIntent);
+		Intent ourIntent = new Intent("com.example.basicmaponline.INFOSERVICO");
+		ourIntent.putExtra("id_servico", listaServico.get(position).getId_servico());
+		startActivity(ourIntent);
 	}
 
 	@Override
@@ -99,12 +96,12 @@ public class Servicos extends ListActivity{
 		return true;
 	}
 
-	public class loadDatabase extends AsyncTask<Integer, Void, ArrayList<SQLservico>>{
+	public class loadDatabase extends AsyncTask<Integer, Void, ArrayList<SQLrelacaoBalcaoServico>>{
 
 		@Override
-		protected ArrayList<SQLservico> doInBackground(Integer... id) {	
+		protected ArrayList<SQLrelacaoBalcaoServico> doInBackground(Integer... id) {	
 		
-			ArrayList<SQLservico> listaLojas = new ArrayList<SQLservico>();
+			ArrayList<SQLrelacaoBalcaoServico> listaLojas = new ArrayList<SQLrelacaoBalcaoServico>();
 		
 			try {
 				PostgreSQL pSQL = new PostgreSQL();
@@ -119,7 +116,7 @@ public class Servicos extends ListActivity{
 		}
 		
 		@Override
-		protected void onPostExecute(ArrayList<SQLservico> listaServicos){
+		protected void onPostExecute(ArrayList<SQLrelacaoBalcaoServico> listaServicos){
 			listaServico = listaServicos;
 		}
 		
