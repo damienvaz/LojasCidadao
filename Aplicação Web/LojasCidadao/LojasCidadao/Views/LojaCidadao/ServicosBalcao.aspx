@@ -15,6 +15,7 @@
     <thead>
         <tr>
             <th>Serviço</th>
+            <th>Tipo</th>
             <th>Estado</th>
             <th></th>
             <th></th>
@@ -23,6 +24,7 @@
     <% foreach (var item in Model) { %>
         <tr>
             <td><%= Html.Encode(item.getNomeServico()) %></td>
+            <td><%= Html.Encode(item.getTipoServico()) %></td>
             <td><%= Html.Encode(item.isEstado()) %></td>
             <td><%= Html.ActionLink("Editar Serviço", "EditServicoBalcao", new { id = item.getLojaID().ToString()+"-"+item.getEntidadeID().ToString()+"-"+item.getServicoID().ToString() })%></td>
             <td><%= Html.ActionLink("Apagar Serviço", "DeleteServicoBalcao", new { id = item.getLojaID().ToString()+"-"+item.getEntidadeID().ToString()+"-"+item.getServicoID().ToString() })%></td>

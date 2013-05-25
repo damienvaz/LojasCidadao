@@ -11,6 +11,7 @@ namespace LojasCidadao.Models
         private int id_entidade;
         private int id_servico;
         private String nome_servico;
+        private string tipo_servico;
         private bool estado;
 
         public RelacaoBalcaoServico()
@@ -19,15 +20,17 @@ namespace LojasCidadao.Models
             this.id_entidade = 0;
             this.id_servico = 0;
             this.nome_servico = "";
+            this.tipo_servico = "";
             this.estado = true;
         }
 
-        public RelacaoBalcaoServico(int id_loja, int id_entidade, int id_servico, bool estado, String nome_servico)
+        public RelacaoBalcaoServico(int id_loja, int id_entidade, int id_servico, bool estado, String nome_servico, String tipo)
         {
             this.id_loja = id_loja;
             this.id_entidade = id_entidade;
             this.id_servico = id_servico;
             this.nome_servico = nome_servico;
+            this.tipo_servico = tipo;
             this.estado = estado;
         }
 
@@ -49,6 +52,11 @@ namespace LojasCidadao.Models
         public String getNomeServico()
         {
             return nome_servico;
+        }
+
+        public String getTipoServico()
+        {
+            return tipo_servico;
         }
 
         public bool isEstado()
@@ -74,6 +82,11 @@ namespace LojasCidadao.Models
         public void setNomeServico(String nome)
         {
             this.nome_servico = nome;
+        }
+
+        public void setTipoServico(String tipo)
+        {
+            this.tipo_servico = tipo;
         }
 
         public void setEstado(bool estado)

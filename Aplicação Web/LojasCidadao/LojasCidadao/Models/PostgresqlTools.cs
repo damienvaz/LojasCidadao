@@ -224,7 +224,7 @@ namespace LojasCidadao.Models
         //-----------------QUERYS DE RELACOES----------------------------
         public override string getQueryServicosDeBalcao(int idloja, int identidade)
         {
-            string query = "SELECT r.*, s.nome_servico FROM public.relacoes_balcao_servico as r, public.servicos as s WHERE r.id_loja_cidadao ="+idloja+" AND r.id_entidade ="+identidade+" AND r.id_servico = s.id_servico;";
+            string query = "SELECT r.*, s.nome_servico, s.tipo_servico FROM public.relacoes_balcao_servico as r, public.servicos as s WHERE r.id_loja_cidadao ="+idloja+" AND r.id_entidade ="+identidade+" AND r.id_servico = s.id_servico;";
             return query;
         }
 
