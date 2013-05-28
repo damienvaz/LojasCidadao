@@ -9,6 +9,7 @@
     <string name="balcao_name">Info Balcao</string>
     <string name="servicos_name">Servicos</string>
     <string name="servico_name">Info Servico</string>
+    <string name="pesquisa_name">Pesquisa</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="button1">Lojas</string>
@@ -37,5 +38,13 @@
     <string name="infoServicoDescricao">Descricao :</string>
     <string name="infoServicoTipo">Tipo :</string>
     <string name="infoServicoUrl">URL :</string>
-
+    <string name="pesquisaHintCaseSensitive">Case sensitive</string>
+    <string name="pesquisaTextView">Pesquisar por : </string>
+    <string name="pesquisaRadioButtonNome">Nome</string>
+	<string name="pesquisaRadioButtonMorada">Morada</string>
+	<string name="pesquisaRadioButtonConcelho">Concelho</string>
+	<string name="pesquisaRadioButtonEntidade">Entidade</string>
+	<string name="pesquisaRadioButtonServico">Servico</string>
+	<string name="pesquisaSearchButton">Botao de pesquisa</string>
+	
 </resources>

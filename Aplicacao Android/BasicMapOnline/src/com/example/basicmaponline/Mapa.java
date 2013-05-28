@@ -17,9 +17,14 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,11 +37,19 @@ public class Mapa extends MapActivity{
     protected static Context MainActivity = null;
     public CapaTap itemizedOverlay;
     public Drawable defaultMarker;
+    Drawable gpsMarker;
+    OverlayItem itemGps;
+    ArrayItemizedOverlay gpsItemizedOverlay;
+    GeoPoint point;
     
     ArrayList<SQLloja> listaLoja;
     Double altitude;
     Double longitude;
     Integer zoom;
+    LocationManager lm;
+    MapView mapView ;
+    
+    Boolean firstTime=true;
     
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,32 +75,48 @@ public class Mapa extends MapActivity{
 		longitude = (Double) intent.getSerializableExtra("longitude");
 		
 		MainActivity=this;
+		//gpsMarker = getResources().getDrawable(R.drawable.mapsredpoiiconsmall);
 		defaultMarker = getResources().getDrawable(R.drawable.markergold);
         itemizedOverlay = new CapaTap(defaultMarker, MainActivity);
+        //gpsItemizedOverlay = new ArrayItemizedOverlay(gpsMarker);
         
         for(SQLloja loja : listaLoja){
         	String informacoesLoja = "Rua : "+loja.getMorada()+"\nC.P. : "+loja.getCodigo_postal()+"\nTel. : "+loja.getTelefone();
         	itemizedOverlay.addItem(new OverlayItem(new GeoPoint(loja.getLatitude(), loja.getLongitude()),"Loja Cidadao "+loja.getNome(),informacoesLoja));
         }
         
-        MapView mapView = new MapView(this, new MapnikTileDownloader());
+        mapView = new MapView(this, new MapnikTileDownloader());
         mapView.setClickable(true);
         mapView.setBuiltInZoomControls(true);
+        //mapView.setTextScale(4f); 
         setContentView(mapView); 
         
         // Ajustar el zoom y el centro del mapa
         mapView.setCenter(new GeoPoint(altitude, longitude));
-        mapView.zoom((byte) 2, 0);  //2
+        mapView.zoom((byte) 2, 0);  
         
         mapView.getOverlays().add(itemizedOverlay);
+        Log.d("GPS3",Integer.toString(mapView.getOverlays().size()));
         mapView.getController().setZoom(zoom);
         
         // MapScaleBar
         MapScaleBar scaleBar = mapView.getMapScaleBar();
         scaleBar.setShowMapScaleBar(true);
 
+        
+        /*---------------*/
+        
+       
+        /*lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);    
 
+        LocationListener locationListener = new MyLocationListener();
+
+        lm.requestLocationUpdates( LocationManager.GPS_PROVIDER,  0, 0, locationListener);
+        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 20, locationListener);*/
+        
     }
+	
+	
 
     public class CapaTap extends ArrayItemizedOverlay {
 		private final Context context;
@@ -122,8 +151,6 @@ public class Mapa extends MapActivity{
 		}
 		
 	}
-    
-   
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -178,5 +205,62 @@ public class Mapa extends MapActivity{
 		}
 		
 	}
+    
+    /* Class My Location Listener */
+
+    /*public class MyLocationListener implements LocationListener {
+
+    *@Override
+	*
+    *public void onLocationChanged(Location loc){
+    *	double latitude = loc.getLatitude();
+    *	double longitude = loc.getLongitude();
+    *	Log.d("GPS","Latitude: "+latitude+" Longitude: "+longitude);
+    *	Log.d("GPS2",Integer.toString(mapView.getOverlays().size()));
+    *	
+    *	GeoPoint point = new GeoPoint(latitude, longitude);
+    *	//gps.addItem(new OverlayItem(point, null, null));
+    *	//mapView.getOverlays().add(gps);
+    *	//mapView.getOverlays().get(2).requestRedraw();
+    *	//Marker marker = new Marker(R.drawable.mapsredpoiicon,point);
+    *	//mapView.getOverlays().get(3).r
+    *	if(firstTime == true){
+    *		Log.d("GPS4","Funcionou");
+    *		itemGps = new OverlayItem(point, null,null);
+    *   	gpsItemizedOverlay.addItem(itemGps);
+    *    	mapView.getOverlays().add(gpsItemizedOverlay);
+    *    	firstTime=false;
+    *    	
+    *	}
+    *
+    *	//OverlayItem item = new OverlayItem(point, null,null);
+    *	//gpsItemizedOverlay.addItem(item);
+    *	//mapView.getOverlays().add(gpsItemizedOverlay);	
+    	
+    	else{
+    		gpsItemizedOverlay.clear();
+    		//itemGps.setPoint(point);
+    		itemGps.setPoint(point);
+    		gpsItemizedOverlay.addItem(itemGps);
+    		gpsItemizedOverlay.requestRedraw();
+    	}
+    }
+
+    @Override
+    public void onProviderDisabled(String provider){
+    }
+
+
+    @Override
+    public void onProviderEnabled(String provider){
+    }
+
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras){
+    }
+
+    }*/ /*End of Class MyLocationListener*/
+    
     
 }

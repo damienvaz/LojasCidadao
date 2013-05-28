@@ -56,7 +56,15 @@ public class Servicos extends ListActivity{
 		lista = new String[listaServico.size()];
 		int i = 0;
 		for(SQLrelacaoBalcaoServico balcao : listaServico){
-			lista[i++] = balcao.getNome_servico() ;
+			String servico = balcao.getNome_servico();
+			String tipo = balcao.getTipoServico();
+
+			servico = servico.concat(" - ");
+			servico = servico.concat(tipo);
+			
+			
+			lista[i] = servico ;
+			i++;
 		}
 		
 		setListAdapter(new ArrayAdapter<String>(Servicos.this, android.R.layout.simple_list_item_1,lista));

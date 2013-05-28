@@ -7,13 +7,16 @@ public class SQLrelacaoBalcaoServico {
 	private Integer id_servico;
 	private Boolean estado_servico_balcao;
 	private String nome_servico;
+	private String tipo_servico;
 	
-	public SQLrelacaoBalcaoServico( Integer id_loja_cidadao, Integer id_entidade,Integer id_servico, Boolean estado_servico_balcao, String nome_servico){
+	public SQLrelacaoBalcaoServico( Integer id_loja_cidadao, Integer id_entidade,Integer id_servico, Boolean estado_servico_balcao, 
+			String nome_servico,String tipo_servico){
 		this.id_servico = id_servico;
 		this.id_entidade = id_entidade;
 		this.nome_servico = nome_servico;
 		this.id_loja_cidadao = id_loja_cidadao;
 		this.estado_servico_balcao = estado_servico_balcao;
+		this.tipo_servico = tipo_servico;
 	}
 	
 	public SQLrelacaoBalcaoServico(SQLrelacaoBalcaoServico servico){
@@ -22,6 +25,7 @@ public class SQLrelacaoBalcaoServico {
 		this.nome_servico = servico.getNome_servico();
 		this.id_loja_cidadao = servico.getId_loja_cidadao();
 		this.estado_servico_balcao = servico.getEstado_servico_balcao();
+		this.tipo_servico = servico.getTipoServico();
 	}
 
 	
@@ -65,9 +69,14 @@ public class SQLrelacaoBalcaoServico {
 	public void setNome_servico(String nome_servico) {
 		this.nome_servico = nome_servico;
 	}
+	
+	public String getTipoServico(){
+		return this.tipo_servico;
+	}
 
 	public SQLrelacaoBalcaoServico clone(){
 		return new SQLrelacaoBalcaoServico(this);
 	}
+	
 	
 }

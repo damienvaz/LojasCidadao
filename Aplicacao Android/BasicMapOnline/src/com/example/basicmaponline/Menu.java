@@ -11,7 +11,8 @@ import android.widget.GridView;
 public class Menu extends Activity{
 
 	String classes[]={"Mapa",
-					  "Lojas"
+					  "Lojas",
+					  "Pesquisar"
 	};
 	
 	
@@ -24,7 +25,7 @@ public class Menu extends Activity{
 		GridView gridView = (GridView) findViewById(R.id.grid);
 		
 		// Instance of ImageAdapter Class
-		gridView.setAdapter(new ImageAdapter(this));
+		gridView.setAdapter(new ImageAdapterMenu(this));
 		/**
 		 * On Click event for Single Gridview Item
 		 * */

@@ -26,22 +26,29 @@ public class Lojas extends ListActivity{
 
 	String[] lista;
 	ArrayList<SQLloja> listaLoja;
+	Boolean pesquisaActivity;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
-		try {
-			listaLoja = new loadDatabase().execute().get();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ExecutionException e) {		
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Intent intent = getIntent();
+		listaLoja = (ArrayList<SQLloja>) intent.getSerializableExtra("listaLoja");
+		pesquisaActivity = (Boolean) intent.getSerializableExtra("pesquisaActivity");
+		//loja =  (SQLloja) intent.getSerializableExtra("loja");
 		
+		if(pesquisaActivity == null){
+			try {
+				listaLoja = new loadDatabase().execute().get();
+			} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ExecutionException e) {		
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		//Action Bar is the bar on the top of each activity !
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);

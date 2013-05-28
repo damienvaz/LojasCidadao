@@ -150,8 +150,9 @@ public class PostgreSQL {
 			Integer id_servico = Integer.parseInt(rs.getString(3));
 			Boolean estado_servico_balcao = Boolean.parseBoolean(rs.getString(4));
 			String nome_servico = rs.getString(5);
+			String tipo_servico = rs.getString(6);
 		
-			SQLrelacaoBalcaoServico servico = new SQLrelacaoBalcaoServico(id_loja_cidadao,id_entidade,id_servico,estado_servico_balcao,nome_servico);
+			SQLrelacaoBalcaoServico servico = new SQLrelacaoBalcaoServico(id_loja_cidadao,id_entidade,id_servico,estado_servico_balcao,nome_servico,tipo_servico);
 			
 			listaServicos.add(servico);
 		}
@@ -186,6 +187,47 @@ public class PostgreSQL {
 		return servico;
 	}
 	
+	public ArrayList<SQLloja> getLojasPesquisa(String sql) throws NumberFormatException, SQLException, ClassNotFoundException{
+		this.conn = PostgreSQL.setConnection(this.host,this.database,this.user,this.password);
+		
+		ArrayList<SQLloja> listaLojas = new ArrayList<SQLloja>();
+		Statement st = this.conn.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		
+		Log.d("PESQUISALOJA","ANTES DO WHILE DA QUERY");
+		
+		while(rs.next()){
+			Log.d("PESQUISALOJA", "ENTREI NO WHILE!!");
+			int lcId = Integer.parseInt(rs.getString(1));
+			String lcNome=rs.getString(2);
+			String lcCP = rs.getString(3);
+			double lcAltitude = Double.parseDouble(rs.getString(6));
+			double lcLongitude = Double.parseDouble(rs.getString(7));
+			String lcTelefone = rs.getString(8);
+			boolean lcEstado = Boolean.parseBoolean(rs.getString(9));
+			String lcRua = rs.getString(10);
+			String lcConcelho = rs.getString(11);
+			String lcDistrito = rs.getString(12);
+			
+			SQLloja loja = new SQLloja(lcId,lcNome,lcCP,lcDistrito,lcConcelho,lcAltitude,lcLongitude,lcTelefone,lcEstado,lcRua);
+    		
+			if(loja != null){
+				Log.d("PESQUISALOJA",loja.getNome());
+			}
+			else {
+				Log.d("PESQUISALOJA","NAO ESTA A TER A PUTA DA LOJA !");
+			}
+			listaLojas.add(loja.clone());
+			
+		}
+		rs.close();
+		st.close();
+		
+		Log.d("PESQUISALOJA","DEPOIS DO WHILE DA QUERY");
+		
+		return listaLojas;
+	}
+	
 	
 	public String getEntidadeQuery(int i){
 		return "SELECT id_entidade, nome_entidade, sigla_entidade, morada_entidade," 
@@ -208,7 +250,7 @@ public class PostgreSQL {
 	}
 	
 	public String getServicosQuery(int idloja,int identidade){
-		return "SELECT r.id_loja_cidadao, r.id_entidade, r.id_servico, r.estado_servico_balcao, s.nome_servico"
+		return "SELECT r.id_loja_cidadao, r.id_entidade, r.id_servico, r.estado_servico_balcao, s.nome_servico,s.tipo_servico"
 			  +" FROM public.relacoes_balcao_servico as r, public.servicos as s"
 			  +" WHERE r.id_loja_cidadao ="+idloja+" AND r.id_entidade ="+identidade+" AND r.id_servico = s.id_servico AND r.estado_servico_balcao ='true' ";
 	}
@@ -218,6 +260,95 @@ public class PostgreSQL {
 				+" FROM public.balcoes as b, public.entidades as e" 
 				+" WHERE b.id_loja_cidadao = " + i +" AND b.id_entidade = e.id_entidade AND b.estado_balcao = 'true'"
 				+" ORDER BY e.nome_entidade";
+	}
+	
+	
+	
+	
+	
+	
+	
+	/*Query da Classe Pesquisa */
+	
+	
+	
+	
+	
+	
+	
+	public String getNomePesquisa(String nome){
+		/*return "SELECT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
+				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
+			    +" l.morada_loja_cidadao"
+				+" FROM public.lojas_cidadao as l"
+				+" WHERE nome_loja_cidadao "
+				+" LIKE '%"+nome+"%' AND estado_loja_cidadao ='true' "
+				+" ORDER BY nome_loja_cidadao";*/
+		return "SELECT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
+				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
+				+" l.morada_loja_cidadao,c.nome_conselho, d.nome_distrito "
+				+" FROM public.lojas_cidadao as l, public.concelhos as c, public.distritos as d "
+				+" WHERE l.id_distrito_loja_cidadao = c.id_distrito AND l.id_conselho_loja_cidadao = c.id_conselho "
+				+" AND l.id_distrito_loja_cidadao = d.id_distrito AND l.nome_loja_cidadao "
+				+" LIKE '%"+nome+"%'  AND l.estado_loja_cidadao ='true' "
+				+" ORDER BY l.nome_loja_cidadao;";
+	}
+	
+	public String getMoradaPesquisa(String morada){
+		/*return "SELECT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
+				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
+			    +" l.morada_loja_cidadao"
+				+" FROM public.lojas_cidadao as l"
+				+" WHERE morada_loja_cidadao LIKE '%" + morada + "%' AND estado_loja_cidadao ='true' "
+				+" ORDER BY nome_loja_cidadao";*/
+		return "SELECT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
+				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
+				+" l.morada_loja_cidadao,c.nome_conselho, d.nome_distrito "
+				+" FROM public.lojas_cidadao as l, public.concelhos as c, public.distritos as d "
+				+" WHERE l.id_distrito_loja_cidadao = c.id_distrito AND l.id_conselho_loja_cidadao = c.id_conselho "
+				+" AND l.id_distrito_loja_cidadao = d.id_distrito AND l.morada_loja_cidadao LIKE '%" + morada + "%' "
+				+" AND l.estado_loja_cidadao ='true' "
+				+"ORDER BY l.nome_loja_cidadao;";
+	}
+	
+	public String getConcelhoPesquisa(String concelho){
+		return "SELECT lc.id_loja_cidacao, lc.nome_loja_cidadao, lc.codigo_postal_loja_cidadao,"
+				+" lc.id_distrito_loja_cidadao, lc.id_conselho_loja_cidadao, lc.latitude_loja_cidadao,"
+				+" lc.longitude_loja_cidadao, lc.telefone_loja_cidadao, lc.estado_loja_cidadao, lc.morada_loja_cidadao"
+				+" FROM (SELECT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
+				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
+			    +" l.morada_loja_cidadao,c.nome_conselho FROM public.lojas_cidadao as l, public.concelhos as c "
+				+" WHERE l.id_conselho_loja_cidadao = c.id_conselho) as lc"
+				+" WHERE lc.nome_conselho LIKE '%"+concelho+"%' AND lc.estado_loja_cidadao ='true' "
+				+" ORDER BY lc.nome_loja_cidadao";
+	}
+	
+	public String getEntidadeSiglaPesquisa(String sigla){
+		return "SELECT DISTINCT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
+				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
+			    +" l.morada_loja_cidadao"
+				+" FROM public.lojas_cidadao as l, "
+				+" (SELECT b.id_loja_cidadao, b.id_entidade, b.estado_balcao,e.sigla_entidade FROM public.balcoes as b, public.entidades as e WHERE b.id_entidade = e.id_entidade) "
+				+" as be "
+				+" WHERE l.id_loja_cidacao = be.id_loja_cidadao AND be.sigla_entidade LIKE upper('%"+sigla+"%') "
+				+" ORDER BY l.nome_loja_cidadao";
+	}
+	
+	public String getServicoPesquisa(String nome){
+		return "SELECT DISTINCT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
+				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
+			    +" l.morada_loja_cidadao "
+				+" FROM public.lojas_cidadao as l, (SELECT r.*, s.nome_servico, s.tipo_servico "
+				+" FROM public.relacoes_balcao_servico as r, public.servicos as s WHERE r.id_servico = s.id_servico) "
+				+" as rs WHERE l.id_loja_cidacao = rs.id_loja_cidadao AND rs.nome_servico LIKE '%"+nome+"%' "
+				+" ORDER BY l.nome_loja_cidadao";
 	}
 	
 	public String getNomeLojasCidadao(){

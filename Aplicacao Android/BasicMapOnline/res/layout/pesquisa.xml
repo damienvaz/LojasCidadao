@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/pesquisaEditText"
+        android:layout_width="match_parent"
+        android:hint="@string/pesquisaHintCaseSensitive"
+        android:layout_height="wrap_content"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pesquisaTextView"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RadioGroup
+        android:id="@+id/pesquisaRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    	
+    	<RadioButton
+        	android:id="@+id/pesquisaRadioButtonNome"
+        	android:layout_marginLeft="40dp"
+        	android:checked="true"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/pesquisaRadioButtonNome" />
+
+    	<RadioButton
+        	android:id="@+id/pesquisaRadioButtonMorada"
+        	android:layout_marginLeft="40dp"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/pesquisaRadioButtonMorada" />
+
+    	<RadioButton
+        	android:id="@+id/pesquisaRadioButtonConcelho"
+        	android:layout_marginLeft="40dp"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/pesquisaRadioButtonConcelho" />
+
+    	<RadioButton
+        	android:id="@+id/pesquisaRadioButtonEntidade"
+        	android:layout_marginLeft="40dp"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="@string/pesquisaRadioButtonEntidade" />
+
+    	<RadioButton
+       		android:id="@+id/pesquisaRadioButtonServico"
+        	android:layout_marginLeft="40dp"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+       		android:text="@string/pesquisaRadioButtonServico" />
+	</RadioGroup>
+    
+    <ImageButton
+        android:id="@+id/pesquisaSearchButton"
+        android:contentDescription="@string/pesquisaSearchButton"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
+        android:background="@drawable/searchbutton"/>
+
+</LinearLayout>
