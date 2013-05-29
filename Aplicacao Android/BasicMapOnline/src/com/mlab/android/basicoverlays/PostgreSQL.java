@@ -45,6 +45,10 @@ public class PostgreSQL {
 		return this.conn;
 	}
 	
+	/*public void setConnection() throws SQLException, ClassNotFoundException{
+		this.conn = PostgreSQL.setConnection(this.host,this.database,this.user,this.password);
+	}*/
+	
 	public String getLojasCidadao() throws SQLException{ 
 		return queryLojasCidadaoOrderByName;
 	} 
@@ -316,7 +320,7 @@ public class PostgreSQL {
 	}
 	
 	public String getConcelhoPesquisa(String concelho){
-		return "SELECT lc.id_loja_cidacao, lc.nome_loja_cidadao, lc.codigo_postal_loja_cidadao,"
+		/*return "SELECT lc.id_loja_cidacao, lc.nome_loja_cidadao, lc.codigo_postal_loja_cidadao,"
 				+" lc.id_distrito_loja_cidadao, lc.id_conselho_loja_cidadao, lc.latitude_loja_cidadao,"
 				+" lc.longitude_loja_cidadao, lc.telefone_loja_cidadao, lc.estado_loja_cidadao, lc.morada_loja_cidadao"
 				+" FROM (SELECT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
@@ -325,11 +329,20 @@ public class PostgreSQL {
 			    +" l.morada_loja_cidadao,c.nome_conselho FROM public.lojas_cidadao as l, public.concelhos as c "
 				+" WHERE l.id_conselho_loja_cidadao = c.id_conselho) as lc"
 				+" WHERE lc.nome_conselho LIKE '%"+concelho+"%' AND lc.estado_loja_cidadao ='true' "
-				+" ORDER BY lc.nome_loja_cidadao";
+				+" ORDER BY lc.nome_loja_cidadao";*/
+		return "SELECT lc.id_loja_cidacao, lc.nome_loja_cidadao, lc.codigo_postal_loja_cidadao," 
+			  +" lc.id_distrito_loja_cidadao, lc.id_conselho_loja_cidadao, lc.latitude_loja_cidadao," 
+              +" lc.longitude_loja_cidadao, lc.telefone_loja_cidadao, lc.estado_loja_cidadao," 
+              +" lc.morada_loja_cidadao, lc.nome_conselho, lc.nome_distrito"
+              +" FROM (SELECT l.*,c.nome_conselho, d.nome_distrito FROM public.lojas_cidadao as l, public.concelhos as c, public.distritos as d "
+              +" WHERE l.id_conselho_loja_cidadao = c.id_conselho AND l.id_distrito_loja_cidadao = c.id_distrito "
+              +" AND l.id_distrito_loja_cidadao = d.id_distrito) as lc" 
+              +" WHERE lc.nome_conselho LIKE '%"+concelho+"%' AND lc.estado_loja_cidadao ='true' "
+              +" ORDER BY lc.nome_loja_cidadao;";
 	}
 	
 	public String getEntidadeSiglaPesquisa(String sigla){
-		return "SELECT DISTINCT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+		/*return "SELECT DISTINCT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
 				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
 				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
 			    +" l.morada_loja_cidadao"
@@ -337,18 +350,35 @@ public class PostgreSQL {
 				+" (SELECT b.id_loja_cidadao, b.id_entidade, b.estado_balcao,e.sigla_entidade FROM public.balcoes as b, public.entidades as e WHERE b.id_entidade = e.id_entidade) "
 				+" as be "
 				+" WHERE l.id_loja_cidacao = be.id_loja_cidadao AND be.sigla_entidade LIKE upper('%"+sigla+"%') "
-				+" ORDER BY l.nome_loja_cidadao";
+				+" ORDER BY l.nome_loja_cidadao";*/
+		return "SELECT DISTINCT lc.id_loja_cidacao, lc.nome_loja_cidadao, lc.codigo_postal_loja_cidadao," 
+			  +" lc.id_distrito_loja_cidadao, lc.id_conselho_loja_cidadao, lc.latitude_loja_cidadao," 
+              +" lc.longitude_loja_cidadao, lc.telefone_loja_cidadao, lc.estado_loja_cidadao," 
+              +" lc.morada_loja_cidadao, lc.nome_conselho, lc.nome_distrito"
+			  +" FROM (SELECT l.*,c.nome_conselho, d.nome_distrito FROM public.lojas_cidadao as l, public.concelhos as c, public.distritos as d "
+			  +" WHERE l.id_conselho_loja_cidadao = c.id_conselho AND l.id_distrito_loja_cidadao = c.id_distrito "
+			  +" AND l.id_distrito_loja_cidadao = d.id_distrito) as lc, (SELECT b.*,e.sigla_entidade "
+			  +" FROM public.balcoes as b, public.entidades as e WHERE b.id_entidade = e.id_entidade) as be" 
+			  +" WHERE lc.id_loja_cidacao = be.id_loja_cidadao AND be.sigla_entidade LIKE upper('%"+sigla+"%') "
+			  +" ORDER BY lc.nome_loja_cidadao;";
 	}
 	
 	public String getServicoPesquisa(String nome){
-		return "SELECT DISTINCT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
+		/*return "SELECT DISTINCT l.id_loja_cidacao, l.nome_loja_cidadao, l.codigo_postal_loja_cidadao," 
 				+" l.id_distrito_loja_cidadao, l.id_conselho_loja_cidadao, l.latitude_loja_cidadao," 
 				+" l.longitude_loja_cidadao, l.telefone_loja_cidadao, l.estado_loja_cidadao," 
 			    +" l.morada_loja_cidadao "
 				+" FROM public.lojas_cidadao as l, (SELECT r.*, s.nome_servico, s.tipo_servico "
 				+" FROM public.relacoes_balcao_servico as r, public.servicos as s WHERE r.id_servico = s.id_servico) "
 				+" as rs WHERE l.id_loja_cidacao = rs.id_loja_cidadao AND rs.nome_servico LIKE '%"+nome+"%' "
-				+" ORDER BY l.nome_loja_cidadao";
+				+" ORDER BY l.nome_loja_cidadao";*/
+		return "SELECT DISTINCT lc.* "
+				+" FROM (SELECT l.*,c.nome_conselho, d.nome_distrito FROM public.lojas_cidadao as l, public.concelhos as c, public.distritos as d "
+				+" WHERE l.id_conselho_loja_cidadao = c.id_conselho AND l.id_distrito_loja_cidadao = c.id_distrito "
+				+" AND l.id_distrito_loja_cidadao = d.id_distrito) as lc, (SELECT r.*, s.nome_servico, s.tipo_servico "
+				+" FROM public.relacoes_balcao_servico as r, public.servicos as s WHERE r.id_servico = s.id_servico) as rs" 
+				+" WHERE lc.id_loja_cidacao = rs.id_loja_cidadao AND rs.nome_servico LIKE '%"+nome+"%' "
+				+" ORDER BY lc.nome_loja_cidadao;";
 	}
 	
 	public String getNomeLojasCidadao(){
@@ -356,7 +386,7 @@ public class PostgreSQL {
 				+    "FROM public.lojas_cidadao";
 	}
 	
-	public static final Connection setConnection(String host,String database,String user,String password) throws SQLException,ClassNotFoundException{
+	public final static Connection setConnection(String host,String database,String user,String password) throws SQLException,ClassNotFoundException{
 		Class.forName ("org.postgresql.Driver") ;
 		String url ;
 		url = "jdbc:postgresql://"+host+":5432/"+database+"?sslfactory=org.postgresql.ssl.NonValidatingFactory"+"&ssl=true";

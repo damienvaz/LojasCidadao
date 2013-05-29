@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:hint="@string/pesquisaHintCaseSensitive"
         android:layout_height="wrap_content"
+        android:inputType="textCapWords"
         android:ems="10" >
 
         <requestFocus />

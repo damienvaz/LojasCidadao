@@ -1,4 +1,9 @@
 package com.example.basicmaponline;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -24,6 +29,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -76,28 +82,40 @@ public class Mapa extends MapActivity{
 		
 		MainActivity=this;
 		//gpsMarker = getResources().getDrawable(R.drawable.mapsredpoiiconsmall);
-		defaultMarker = getResources().getDrawable(R.drawable.markergold);
-        itemizedOverlay = new CapaTap(defaultMarker, MainActivity);
+		//defaultMarker = getResources().getDrawable(R.drawable.markergold);
+        //itemizedOverlay = new CapaTap(defaultMarker, MainActivity);
         //gpsItemizedOverlay = new ArrayItemizedOverlay(gpsMarker);
+        
+        /*for(SQLloja loja : listaLoja){
+        	String informacoesLoja = "Rua : "+loja.getMorada()+"\nC.P. : "+loja.getCodigo_postal()+"\nTel. : "+loja.getTelefone();
+        	itemizedOverlay.addItem(new OverlayItem(new GeoPoint(loja.getLatitude(), loja.getLongitude()),"Loja Cidadao "+loja.getNome(),informacoesLoja));
+        }*/
+        
+        //mapView = new MapView(this, new MapnikTileDownloader());
+        mapView = new MapView(this);
+        mapView.setClickable(true);
+        mapView.setBuiltInZoomControls(true);
+        
+        copyFiles();
+        
+        defaultMarker = getResources().getDrawable(R.drawable.markergold);
+        itemizedOverlay = new CapaTap(defaultMarker, MainActivity);
         
         for(SQLloja loja : listaLoja){
         	String informacoesLoja = "Rua : "+loja.getMorada()+"\nC.P. : "+loja.getCodigo_postal()+"\nTel. : "+loja.getTelefone();
         	itemizedOverlay.addItem(new OverlayItem(new GeoPoint(loja.getLatitude(), loja.getLongitude()),"Loja Cidadao "+loja.getNome(),informacoesLoja));
         }
         
-        mapView = new MapView(this, new MapnikTileDownloader());
-        mapView.setClickable(true);
-        mapView.setBuiltInZoomControls(true);
-        //mapView.setTextScale(4f); 
+        mapView.setTextScale(2f); 
         setContentView(mapView); 
         
         // Ajustar el zoom y el centro del mapa
-        mapView.setCenter(new GeoPoint(altitude, longitude));
-        mapView.zoom((byte) 2, 0);  
+        mapView.setCenter(new GeoPoint(altitude, longitude)); 
         
         mapView.getOverlays().add(itemizedOverlay);
         Log.d("GPS3",Integer.toString(mapView.getOverlays().size()));
-        mapView.getController().setZoom(zoom);
+        mapView.getController().setZoom(8);
+        
         
         // MapScaleBar
         MapScaleBar scaleBar = mapView.getMapScaleBar();
@@ -116,6 +134,52 @@ public class Mapa extends MapActivity{
         
     }
 	
+	private void copyFiles() {
+		try {  	  
+        	String filepath=Environment.getExternalStorageDirectory().getPath()+"/maps/portugal.map";
+        	File mapfile=new File(filepath);
+        	if(mapfile.exists()==false) {
+        		mapfile=copyFileToSdcard(R.raw.portugal, "portugal.map", "maps");
+        	}        	
+        	mapView.setMapFile(mapfile);
+        	
+        	// Copiar el marcador a  sdcard/maps
+    		Log.d("HAL","Copiando el marcador desde raw a "+mapfile.getAbsolutePath());
+    		//copyFileToSdcard(R.drawable.markergold, "markergold.png", "maps");
+
+    		
+        } catch (Exception e) {
+        	Log.e("HAL","Error"+e.getMessage());
+        	return;
+        
+        }
+        
+	}
+	
+	private File copyFileToSdcard(int resid, String filename, String sdcardDirectoryName) {
+    	Log.d("HAL","copyFileToSdcard()");	
+    	String dirpath=Environment.getExternalStorageDirectory().getPath()+"/"+sdcardDirectoryName;
+		File dir= new File(dirpath);
+    	if(dir.exists()==false) {
+        	Log.d("HAL","Creando directorio "+dir.getAbsolutePath());
+    		dir.mkdir();
+    	}
+    	
+		File file = new File(dirpath, filename); 
+		try {
+	        InputStream is = getResources().openRawResource(resid);
+	        OutputStream os = new FileOutputStream(file);
+	        byte[] data = new byte[is.available()];
+	        is.read(data);
+	        os.write(data);
+	        is.close();
+	        os.close();
+	    } catch (IOException e) {
+	        //Log.w("ExternalStorage", "Error writing " + file, e);
+	        return null;
+	    }
+	    return file;
+	}
 	
 
     public class CapaTap extends ArrayItemizedOverlay {

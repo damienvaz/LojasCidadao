@@ -9,6 +9,7 @@ import com.mlab.android.basicoverlays.SQLrelacaoBalcaoServico;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ public class Servicos extends ListActivity{
 	String lista[];
 	Integer id_entidade;
 	Integer id_loja;
+	
+	ProgressDialog progressDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +46,11 @@ public class Servicos extends ListActivity{
 		id[0] = id_loja;
 		id[1] = id_entidade;
 		
-		try {
-			listaServico = new loadDatabase().execute(id).get();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ExecutionException e) {		
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(listaServico == null){
+			new loadDatabase().execute(id);
 		}
 		
-		lista = new String[listaServico.size()];
+		/*lista = new String[listaServico.size()];
 		int i = 0;
 		for(SQLrelacaoBalcaoServico balcao : listaServico){
 			String servico = balcao.getNome_servico();
@@ -67,7 +64,7 @@ public class Servicos extends ListActivity{
 			i++;
 		}
 		
-		setListAdapter(new ArrayAdapter<String>(Servicos.this, android.R.layout.simple_list_item_1,lista));
+		setListAdapter(new ArrayAdapter<String>(Servicos.this, android.R.layout.simple_list_item_1,lista));*/
 		
 	}
 	
@@ -107,6 +104,16 @@ public class Servicos extends ListActivity{
 	public class loadDatabase extends AsyncTask<Integer, Void, ArrayList<SQLrelacaoBalcaoServico>>{
 
 		@Override
+	    protected void onPreExecute()
+	    {
+			progressDialog = new ProgressDialog(Servicos.this); 
+	        progressDialog.setTitle("Processando...");
+	        progressDialog.setMessage("Por favor,espera...");
+	        progressDialog.setCancelable(true);
+	        progressDialog.show();             
+	    }; 
+		
+		@Override
 		protected ArrayList<SQLrelacaoBalcaoServico> doInBackground(Integer... id) {	
 		
 			ArrayList<SQLrelacaoBalcaoServico> listaLojas = new ArrayList<SQLrelacaoBalcaoServico>();
@@ -126,6 +133,23 @@ public class Servicos extends ListActivity{
 		@Override
 		protected void onPostExecute(ArrayList<SQLrelacaoBalcaoServico> listaServicos){
 			listaServico = listaServicos;
+			
+			lista = new String[listaServico.size()];
+			int i = 0;
+			for(SQLrelacaoBalcaoServico balcao : listaServico){
+				String servico = balcao.getNome_servico();
+				String tipo = balcao.getTipoServico();
+
+				servico = servico.concat(" - ");
+				servico = servico.concat(tipo);
+				
+				
+				lista[i] = servico ;
+				i++;
+			}
+			
+			setListAdapter(new ArrayAdapter<String>(Servicos.this, android.R.layout.simple_list_item_1,lista));
+			progressDialog.dismiss();
 		}
 		
 	}
