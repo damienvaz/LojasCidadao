@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.basicmaponline"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/lojacidadao"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.example.basicmaponline.Intro"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.example.basicmaponline.Menu"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.MENU" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.example.basicmaponline.Mapa"
+            android:screenOrientation="portrait"
+            android:label="@string/map_name">
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.MAPA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.basicmaponline.Lojas"
+            android:screenOrientation="portrait"
+            android:label="@string/lojas_name">
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.LOJAS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.example.basicmaponline.InfoLoja"
+            android:screenOrientation="portrait"
+            android:label="@string/loja_name">
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.INFOLOJA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.example.basicmaponline.Balcoes"
+            android:screenOrientation="portrait"
+            android:label="@string/balcoes_name" >
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.BALCOES" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.example.basicmaponline.Entidade"
+            android:screenOrientation="portrait"
+            android:label="@string/balcao_name">
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.ENTIDADE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity
+            android:name="com.example.basicmaponline.Servicos"
+            android:screenOrientation="portrait"
+            android:label="@string/servicos_name">
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.SERVICOS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity
+            android:name="com.example.basicmaponline.InfoServico"
+            android:screenOrientation="portrait"
+            android:label="@string/servico_name">
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.INFOSERVICO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity
+            android:name="com.example.basicmaponline.Pesquisar"
+            android:screenOrientation="portrait"
+            android:label="@string/pesquisa_name" >
+            <intent-filter>
+                <action android:name="com.example.basicmaponline.PESQUISAR" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+    </application>
+</manifest>

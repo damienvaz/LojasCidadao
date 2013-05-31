@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    	android:background="@drawable/shape">
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeNome" 
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"/>
+
+        	<TextView
+            	android:id="@+id/entidadeNome"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:textStyle="normal|italic"
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:textColor="#000000"/>
+		</LinearLayout>
+    
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeSigla" 
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"/>
+
+        	<TextView
+            	android:id="@+id/entidadeSigla"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:textStyle="normal|italic"
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:textColor="#000000"/>
+		</LinearLayout>
+	
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeMorada" 
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"/>
+
+        	<TextView
+            	android:id="@+id/entidadeMorada"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:textStyle="normal|italic"
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:textColor="#000000"/>
+		</LinearLayout>
+	
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeTelefone" 
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"/>
+
+        	<TextView
+            	android:id="@+id/entidadeTelefone"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content" 
+            	android:clickable="true"
+            	android:textStyle="normal|italic"
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:textColor="#0000FF"/>
+		</LinearLayout>
+	
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeFax" 
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"
+            	/>
+
+        	<TextView
+            	android:id="@+id/entidadeFax"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_marginLeft="5dp"/>
+		</LinearLayout>
+	
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeEmail" 
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"/>
+
+        	<TextView
+            	android:id="@+id/entidadeEmail"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content" 
+            	android:clickable="true"
+            	android:textStyle="normal|italic"
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:textColor="#0000FF"/>
+		</LinearLayout>
+	
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeURL" 
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"/>
+
+        	<TextView
+            	android:id="@+id/entidadeURL"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content" 
+            	android:clickable="true"
+            	android:textStyle="normal|italic"
+            	android:layout_marginBottom="20dp"
+            	android:layout_marginLeft="5dp"
+            	android:textColor="#0000FF"/>
+		</LinearLayout>
+	
+    	<LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content" >
+
+        	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/entidadeSite"
+            	android:layout_marginLeft="5dp"
+            	android:typeface="monospace"
+            	android:textStyle="normal|bold" 
+            	android:textColor="#000000"/>
+
+        	<TextView
+            	android:id="@+id/entidadeSite"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:clickable="true"
+            	android:textStyle="normal|italic"
+            	android:textColor="#0000FF"
+            	android:layout_marginLeft="5dp"/>
+            	<!--android:layout_marginBottom="20dp"-->
+		</LinearLayout>
+	</LinearLayout>
+	
+    <LinearLayout 
+        android:weightSum="100"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        android:gravity="center">
+    	
+    	<ImageButton
+        	android:id="@+id/entidadeButton"
+        	android:layout_marginTop="15dp" 
+        	android:layout_width="80dp"
+        	android:layout_height="75dp"
+        	android:clickable="true"
+        	android:background="@drawable/serviceicon"
+        	android:layout_gravity="top|center_horizontal" />
+    	
+    	<TextView
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:textStyle="normal|italic"
+            	android:text="@string/entidadeBotao"
+           		android:layout_gravity="top|center_horizontal"/>
+    	
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
