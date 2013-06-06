@@ -11,7 +11,7 @@
     <p>Apagou com sucesso a entidade.</p>
 </div>
 <div>
-    <p><a href="/entidade">Voltar à lista</a></p>
+    <p><a href="/Entidade">Voltar à lista</a></p>
 </div>
 
 </asp:Content>

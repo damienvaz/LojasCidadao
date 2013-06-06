@@ -11,7 +11,7 @@
     <p>Apagou com sucesso o balcão da loja do cidadão.</p>
 </div>
 <div>
-    <p><a href="/lojacidadao">Voltar à lista</a></p>
+    <p><a href="/Lojacidadao">Voltar à lista</a></p>
 </div>
 
 </asp:Content>

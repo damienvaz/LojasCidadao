@@ -110,7 +110,7 @@ namespace LojasCidadao.Models
 
         public static String getQueryDeleteServico(int id)
         {
-            return bd.getQueryDeleteEntidade(id);
+            return bd.getQueryDeleteServico(id);
         }
 
         public static String getQueryUpdateServico(int id, Servico s)

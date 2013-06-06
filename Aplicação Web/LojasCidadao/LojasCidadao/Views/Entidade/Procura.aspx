@@ -15,7 +15,7 @@
         </p>
         
         <p>
-            <label for="Sigla">pesquisa por Sigla:</label>
+            <label for="Sigla">Pesquisa por Sigla:</label>
             <%= Html.TextBox("Sigla") %>
         </p>
 

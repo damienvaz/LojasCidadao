@@ -29,7 +29,7 @@
 </script>
 
 <div>
-    <%: Html.ActionLink("Voltar à Lista", "Index") %>
+    <%: Html.ActionLink("Voltar aos Detalhes", "Detalhes", new { id = Model.getId() }) %>
 </div>
 
 </asp:Content>

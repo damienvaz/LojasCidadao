@@ -230,7 +230,7 @@ namespace LojasCidadao.Models
 
         public override string getQueryServicoDeBalcaoPorID(int idloja, int identidade, int idservico)
         {
-            string query = "SELECT r.*, s.nome_servico FROM public.relacoes_balcao_servico as r, public.servicos as s WHERE r.id_loja_cidadao =" + idloja + " AND r.id_entidade =" + identidade + " AND r.id_servico =" + idservico + " AND r.id_servico = s.id_servico;";
+            string query = "SELECT r.*, s.nome_servico, s.tipo_servico FROM public.relacoes_balcao_servico as r, public.servicos as s WHERE r.id_loja_cidadao =" + idloja + " AND r.id_entidade =" + identidade + " AND r.id_servico =" + idservico + " AND r.id_servico = s.id_servico;";
             return query;
         }
 

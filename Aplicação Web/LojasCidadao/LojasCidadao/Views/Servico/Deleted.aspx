@@ -11,7 +11,7 @@
     <p>Apagou com sucesso o serviço.</p>
 </div>
 <div>
-    <p><a href="/servico">Voltar à lista</a></p>
+    <p><a href="/Servico">Voltar à lista</a></p>
 </div>
 
 </asp:Content>
